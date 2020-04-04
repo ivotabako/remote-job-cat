@@ -17,5 +17,7 @@ namespace RemoteJobCat.Api.Data
         public DbSet<RemoteJobCat.Api.Models.Employee> Employee { get; set; }
 
         public DbSet<RemoteJobCat.Api.Models.Recommendation> Recommendation { get; set; }
+
+        public DbSet<RemoteJobCat.Api.Models.InternalRecommendation> InternalRecommendation { get; set; }
     }
 }
