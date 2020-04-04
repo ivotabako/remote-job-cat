@@ -19,5 +19,13 @@ namespace RemoteJobCat.Api.Data
         public DbSet<RemoteJobCat.Api.Models.Recommendation> Recommendation { get; set; }
 
         public DbSet<RemoteJobCat.Api.Models.InternalRecommendation> InternalRecommendation { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Rate>()
+                .Property(p => p.Amount)
+                .HasColumnType("decimal(18,2)");
+        }
     }
 }

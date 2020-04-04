@@ -21,9 +21,9 @@ namespace RemoteJobCat.Api.Models
 
         public bool IsPermanent { get; set; }
 
-        public Money FixedSalaryPerHour { get; set; }
+        public Rate FixedRate { get; set; }
 
-        public Range<Money> MoneyRange { get; set; }
+        public Range<Rate> RateRange { get; set; }
 
         public Guid EmployerId { get; set; }
 

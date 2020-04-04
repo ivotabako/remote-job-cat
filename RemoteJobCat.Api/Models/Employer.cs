@@ -25,8 +25,6 @@ namespace RemoteJobCat.Api.Models
 
         public List<Job> FinishedJobs = new List<Job>();
 
-        public Money ExpectedRatePerHour { get; set; }
-
         public bool IsActive { get; set; }
 
         public bool IsBlocked { get; set; }
