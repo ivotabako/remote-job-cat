@@ -20,5 +20,25 @@ namespace RemoteJobCat.Api.Models
         public string Email { get; set; }
 
         public int CoutryCode { get; set; }
+
+        public int RejectedCount { get; set; }
+
+        public int ApprovedCount { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public bool IsBlocked { get; set; }
+
+        public string ShortSelfIntroduction { get; set; }
+
+        public string Title { get; set; }
+
+        public string Experience { get; set; }
+
+        public List<string> Recommendations { get; set; }
+
+        public Uri LinkedInProfileUrl { get; set; }
+
+        public List<InternalRecommendation> InternalRecommendations { get; set; }
     }
 }
