@@ -35,7 +35,7 @@ namespace RemoteJobCat.Api.Models
 
         public string Experience { get; set; }
 
-        public List<string> Recommendations { get; set; }
+        public List<Recommendation> Recommendations { get; set; }
 
         public Uri LinkedInProfileUrl { get; set; }
 
