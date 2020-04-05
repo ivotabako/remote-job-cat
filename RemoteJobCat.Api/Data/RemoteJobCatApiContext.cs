@@ -27,5 +27,7 @@ namespace RemoteJobCat.Api.Data
                 .Property(p => p.Amount)
                 .HasColumnType("decimal(18,2)");
         }
+
+        public DbSet<RemoteJobCat.Api.Models.Employer> Employer { get; set; }
     }
 }

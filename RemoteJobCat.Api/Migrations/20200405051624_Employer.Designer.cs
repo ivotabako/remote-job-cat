@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RemoteJobCat.Api.Data;
 
 namespace RemoteJobCat.Api.Migrations
 {
     [DbContext(typeof(RemoteJobCatApiContext))]
-    partial class RemoteJobCatApiContextModelSnapshot : ModelSnapshot
+    [Migration("20200405051624_Employer")]
+    partial class Employer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
