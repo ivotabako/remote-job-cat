@@ -29,5 +29,7 @@ namespace RemoteJobCat.Api.Data
         }
 
         public DbSet<RemoteJobCat.Api.Models.Employer> Employer { get; set; }
+
+        public DbSet<RemoteJobCat.Api.Models.Job> Job { get; set; }
     }
 }

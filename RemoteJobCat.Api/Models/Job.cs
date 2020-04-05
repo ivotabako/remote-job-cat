@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +24,7 @@ namespace RemoteJobCat.Api.Models
 
         public Rate FixedRate { get; set; }
 
+        [NotMapped]
         public Range<Rate> RateRange { get; set; }
 
         public Guid EmployerId { get; set; }
