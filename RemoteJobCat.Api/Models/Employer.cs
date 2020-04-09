@@ -21,14 +21,12 @@ namespace RemoteJobCat.Api.Models
 
         public int ContactPhone { get; set; }
 
-        public List<Job> OpenJobs = new List<Job>();
-
-        public List<Job> FinishedJobs = new List<Job>();
+        public ICollection<Job> Jobs { get; set; }
 
         public bool IsActive { get; set; }
 
         public bool IsBlocked { get; set; }
 
-        public List<Report> Reports { get; set; }
+        public ICollection<Report> Reports { get; set; }
     }
 }

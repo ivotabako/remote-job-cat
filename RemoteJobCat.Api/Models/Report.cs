@@ -12,8 +12,8 @@ namespace RemoteJobCat.Api.Models
 
         public string Desctiption { get; set; }
 
-        public Guid EmployerId { get; set; }
+        public Employer Employer { get; set; }
 
-        public Guid EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }

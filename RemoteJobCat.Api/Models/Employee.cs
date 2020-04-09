@@ -21,9 +21,7 @@ namespace RemoteJobCat.Api.Models
 
         public int CoutryCode { get; set; }
 
-        public int RejectedCount { get; set; }
-
-        public int ApprovedCount { get; set; }
+        public ICollection<EmployeeJob> EmployeeJob { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -37,10 +35,10 @@ namespace RemoteJobCat.Api.Models
 
         public Rate ExpectedRate { get; set; }
 
-        public List<Recommendation> Recommendations { get; set; }
+        public ICollection<Recommendation> Recommendations { get; set; }
 
         public Uri LinkedInProfileUrl { get; set; }
 
-        public List<InternalRecommendation> InternalRecommendations { get; set; }
+        public ICollection<InternalRecommendation> InternalRecommendations { get; set; }
     }
 }

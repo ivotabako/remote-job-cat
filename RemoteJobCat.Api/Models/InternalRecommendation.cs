@@ -9,10 +9,10 @@ namespace RemoteJobCat.Api.Models
     {
         public Guid Id { get; set; }
 
-        public Guid RecommendedEmployee { get; set; }
+        public Employee RecommendedEmployee { get; set; }
 
         public string Description { get; set; }
 
-        public Guid RecommendatorEmployee { get; set; }
+        public Employee RecommendatorEmployee { get; set; }
     }
 }

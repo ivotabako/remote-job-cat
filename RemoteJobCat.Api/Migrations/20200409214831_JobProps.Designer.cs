@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RemoteJobCat.Api.Data;
 
 namespace RemoteJobCat.Api.Migrations
 {
     [DbContext(typeof(RemoteJobCatApiContext))]
-    partial class RemoteJobCatApiContextModelSnapshot : ModelSnapshot
+    [Migration("20200409214831_JobProps")]
+    partial class JobProps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,6 +53,9 @@ namespace RemoteJobCat.Api.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("ApprovedCount")
+                        .HasColumnType("int");
+
                     b.Property<int>("CoutryCode")
                         .HasColumnType("int");
 
@@ -72,6 +77,15 @@ namespace RemoteJobCat.Api.Migrations
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("JobId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("JobId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("JobId2")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -79,6 +93,9 @@ namespace RemoteJobCat.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Phone")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RejectedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ShortSelfIntroduction")
@@ -91,31 +108,13 @@ namespace RemoteJobCat.Api.Migrations
 
                     b.HasIndex("ExpectedRateId");
 
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("JobId1");
+
+                    b.HasIndex("JobId2");
+
                     b.ToTable("Employee");
-                });
-
-            modelBuilder.Entity("RemoteJobCat.Api.Models.EmployeeJob", b =>
-                {
-                    b.Property<Guid>("JobId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPendingApproval")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRejected")
-                        .HasColumnType("bit");
-
-                    b.HasKey("JobId", "EmployeeId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeJob");
                 });
 
             modelBuilder.Entity("RemoteJobCat.Api.Models.Employer", b =>
@@ -194,19 +193,19 @@ namespace RemoteJobCat.Api.Migrations
                     b.Property<Guid?>("EmployerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("EmployerId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EmployerId2")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("FixedRateId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsFinished")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsPermanent")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRecruitmentInProgress")
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
@@ -218,6 +217,10 @@ namespace RemoteJobCat.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmployerId");
+
+                    b.HasIndex("EmployerId1");
+
+                    b.HasIndex("EmployerId2");
 
                     b.HasIndex("FixedRateId");
 
@@ -292,21 +295,18 @@ namespace RemoteJobCat.Api.Migrations
                     b.HasOne("RemoteJobCat.Api.Models.Rate", "ExpectedRate")
                         .WithMany()
                         .HasForeignKey("ExpectedRateId");
-                });
 
-            modelBuilder.Entity("RemoteJobCat.Api.Models.EmployeeJob", b =>
-                {
-                    b.HasOne("RemoteJobCat.Api.Models.Employee", "Employee")
-                        .WithMany("EmployeeJob")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("RemoteJobCat.Api.Models.Job", null)
+                        .WithMany("ApprovedApplicants")
+                        .HasForeignKey("JobId");
 
-                    b.HasOne("RemoteJobCat.Api.Models.Job", "Job")
-                        .WithMany("EmployeeJob")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("RemoteJobCat.Api.Models.Job", null)
+                        .WithMany("PendingApplicants")
+                        .HasForeignKey("JobId1");
+
+                    b.HasOne("RemoteJobCat.Api.Models.Job", null)
+                        .WithMany("RejectedApplicants")
+                        .HasForeignKey("JobId2");
                 });
 
             modelBuilder.Entity("RemoteJobCat.Api.Models.Employer", b =>
@@ -329,9 +329,17 @@ namespace RemoteJobCat.Api.Migrations
 
             modelBuilder.Entity("RemoteJobCat.Api.Models.Job", b =>
                 {
-                    b.HasOne("RemoteJobCat.Api.Models.Employer", "Employer")
-                        .WithMany("Jobs")
+                    b.HasOne("RemoteJobCat.Api.Models.Employer", null)
+                        .WithMany("OpenJobs")
                         .HasForeignKey("EmployerId");
+
+                    b.HasOne("RemoteJobCat.Api.Models.Employer", null)
+                        .WithMany("FinishedJobs")
+                        .HasForeignKey("EmployerId1");
+
+                    b.HasOne("RemoteJobCat.Api.Models.Employer", "Employer")
+                        .WithMany()
+                        .HasForeignKey("EmployerId2");
 
                     b.HasOne("RemoteJobCat.Api.Models.Rate", "FixedRate")
                         .WithMany()

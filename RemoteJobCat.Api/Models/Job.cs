@@ -14,6 +14,10 @@ namespace RemoteJobCat.Api.Models
 
         public string Location { get; set; }
 
+        public bool IsFinished { get; set; }
+
+        public bool IsRecruitmentInProgress { get; set; }
+
         public TimeSpan? Duration { get; set; }
 
         public DateTime? StartDate { get; set; }
@@ -27,12 +31,8 @@ namespace RemoteJobCat.Api.Models
         [NotMapped]
         public Range<Rate> RateRange { get; set; }
 
-        public Guid EmployerId { get; set; }
+        public Employer Employer { get; set; }
 
-        public List<Employee> ApprovedApplicants = new List<Employee>();
-
-        public List<Employee> PendingApplicants = new List<Employee>();
-
-        public List<Employee> RejectedApplicants = new List<Employee>();
+        public ICollection<EmployeeJob> EmployeeJob { get; set; }
     }
 }
