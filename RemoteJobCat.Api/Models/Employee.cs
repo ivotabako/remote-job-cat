@@ -33,7 +33,7 @@ namespace RemoteJobCat.Api.Models
 
         public string Experience { get; set; }
 
-        public Rate ExpectedRate { get; set; }
+        public Rate Rate { get; set; }
 
         public ICollection<Recommendation> Recommendations { get; set; }
 
